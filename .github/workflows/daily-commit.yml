@@ -1,0 +1,20 @@
+name: Daily Commit Automation
+
+on:
+  schedule:
+    - cron: "0 8 * * *"  # Runs every day at 8 AM UTC
+
+jobs:
+  commit-changes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Commit changes
+        run: |
+          git config --global user.email "your-email@example.com"
+          git config --global user.name "Diluka Bandara"
+          git add .
+          git commit -m "Automated commit to boost commit count"
+          git push origin main
