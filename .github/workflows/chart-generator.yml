@@ -1,0 +1,28 @@
+name: Chart Generator
+
+on:
+  push:
+    branches:
+      - main  # or any branch you push to
+
+jobs:
+  generate-charts:
+    runs-on: ubuntu-latest  # Use Ubuntu for execution
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Generate Contribution Graph
+      uses: olegkoval/contribution-graph-action@v2
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}  # Token to authenticate API requests
+        width: 800
+        height: 400
+        output: contribution-graph.png  # Output file for the graph
+
+    - name: Upload Contribution Graph
+      uses: actions/upload-artifact@v3
+      with:
+        name: contribution-graph
+        path: contribution-graph.png
